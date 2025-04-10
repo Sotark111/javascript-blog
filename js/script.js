@@ -19,9 +19,9 @@ document.getElementById('test-button').addEventListener('click', function(){
         activeLink.classList.remove('active');
     }
     /* [IN PROGRESS] add class 'active' to the clicked link */
-    const clickedElement = event.target;
+    const clickedElement = event.currentTarget;
     clickedElement.classList.add('active');
-    console.log('clickedElement:', clickedElement);
+  
   
     /*[DONE] remove class 'active' from all articles */
     const activeArticles = document.querySelectorAll('.posts .post.active');
