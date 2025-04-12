@@ -1,83 +1,62 @@
-/*
-document.getElementById('test-button').addEventListener('click', function(){
-    const links = document.querySelectorAll('.titles a');
-    console.log('links:', links);
-  }); */
+const optArticleSelector = '.post',
+      optTitleSelector = '.post-title',
+      optTitleListSelector = '.titles';
 
-  
-  const titleClickHandler = function(event){
-    console.log('Link was clicked!');
-    console.log(event);
-  
-    /*[DONE] remove class 'active' from all article links  */
+function generateTitleLinks() {
+  // Remove contents of titleList
+  const titleList = document.querySelector(optTitleListSelector);
+  titleList.innerHTML = '';
 
-    
+  // For each article
+  const articles = document.querySelectorAll(optArticleSelector);
+  for (const article of articles) {
+    // Get the article id
+    const articleId = article.getAttribute('id');
 
-    const activeLinks = document.querySelectorAll('.titles a.active');
+    // Find the title element
+    const articleTitle = article.querySelector(optTitleSelector).innerHTML;
 
-    for(let activeLink of activeLinks){
-        activeLink.classList.remove('active');
-    }
-    /* [IN PROGRESS] add class 'active' to the clicked link */
-    const clickedElement = event.currentTarget;
-    clickedElement.classList.add('active');
-  
-  
-    /*[DONE] remove class 'active' from all articles */
-    const activeArticles = document.querySelectorAll('.posts .post.active');
-
-    for(let activeArticle of activeArticles){
-        activeArticle.classList.remove('active');
-    }
-    /*[IN PROGRESS] get 'href' attribute from the clicked link */
-
-    const articleSelector = clickedElement.getAttribute('href');
-    console.log(articleSelector);
-  
-    /* [IN PROGRESS]find the correct article using the selector (value of 'href' attribute) */
-
-    const targetArticle = document.querySelector(articleSelector);
-    console.log('targetArticle:', targetArticle);
-
-
-    /*[IN PROGRESS] add class 'active' to the correct article */
-    targetArticle.classList.add('active');
+    // Create HTML of the link
+    const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+    // Insert link into titleList
+    titleList.insertAdjacentHTML('beforeend', linkHTML);
   }
-  
-  const links = document.querySelectorAll('.titles a');
-  
-  for(let link of links){
+
+  // Add click event listeners to the new links
+  const links = titleList.querySelectorAll('a');
+  for (const link of links) {
     link.addEventListener('click', titleClickHandler);
-
-
-
-
-  const optArticleSelector = '.post',
-  optTitleSelector = '.post-title',
-  optTitleListSelector = '.titles';
-
-function generateTitleLinks(){
-  
-
-  /* remove contents of titleList */
-/*
-    const titleList = document.querySelector(optTitleListSelector);
-    titleList.innerHTML = ''; */
+  }
 }
 
-  /* for each article */
 
-    /* get the article id */
+const titleClickHandler = function(event) {
+  event.preventDefault();
 
-    /* find the title element */
+  // Remove 'active' class from all article links
+  const activeLinks = document.querySelectorAll('.titles a.active');
+  for (let activeLink of activeLinks) {
+    activeLink.classList.remove('active');
+  }
 
-    /* get the title from the title element */
+  // Add 'active' class to the clicked link
+  const clickedElement = event.currentTarget;
+  clickedElement.classList.add('active');
 
-    /* create HTML of the link */
+  // Remove 'active' class from all articles
+  const activeArticles = document.querySelectorAll('.posts .post.active');
+  for (let activeArticle of activeArticles) {
+    activeArticle.classList.remove('active');
+  }
 
-    /* insert link into titleList */
+  // Get 'href' attribute from the clicked link
+  const articleSelector = clickedElement.getAttribute('href');
 
-}
+  // Find the correct article using the selector
+  const targetArticle = document.querySelector(articleSelector);
+
+  // Add 'active' class to the correct article
+  targetArticle.classList.add('active');
+};
 
 generateTitleLinks();
-  
