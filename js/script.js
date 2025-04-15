@@ -174,6 +174,7 @@ function addClickListenersToAuthors() {
   for (let authorLink of authorLinks) {
     authorLink.addEventListener('click', authorClickHandler);
   }
+  
 }
 
 
