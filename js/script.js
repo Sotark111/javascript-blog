@@ -106,7 +106,7 @@ function tagClickHandler(event) {
   generateTitleLinks('[data-tags~="' + tag + '"]');
 
   // Find all active tag links and remove active class
-  const activeTagLinks = document.querySelectorAll('a.active');
+  const activeTagLinks = document.querySelectorAll('a[href^="#tag-"].active');
   /* START LOOP: for each active tag link */
 
   for (let activeTag of activeTagLinks) {
@@ -156,7 +156,7 @@ function authorClickHandler(event) {
   const author = href.replace('#author-', '');
 
   
-  const activeAuthorLinks = document.querySelectorAll('a.active');
+  const activeAuthorLinks = document.querySelectorAll('a[href^="#author-"].active');
   for (let activeAuthor of activeAuthorLinks) {
     activeAuthor.classList.remove('active');
   }
@@ -177,8 +177,8 @@ function addClickListenersToAuthors() {
 }
 
 
-generateAuthors();
-addClickListenersToAuthors();
-addClickListenersToTags();
 generateTags();
-generateTitleLinks();
+generateAuthors();
+generateTitleLinks(); 
+addClickListenersToTags();
+addClickListenersToAuthors(); 
